@@ -1,0 +1,31 @@
+{
+  "mcp": {
+    "inputs": [
+      {
+        "type": "promptString",
+        "id": "pinelabs_client_id",
+        "description": "Pine Labs Client ID"
+      },
+      {
+        "type": "promptString",
+        "id": "pinelabs_client_secret",
+        "description": "Pine Labs Client Secret",
+        "password": true
+      }
+    ],
+    "servers": {
+      "pinelabs": {
+        "command": "python",
+        "args": [
+          "-m",
+          "cli.pinelabs_mcp_server.main",
+          "stdio",
+          "--client-id",
+          "${input:pinelabs_client_id}",
+          "--client-secret",
+          "${input:pinelabs_client_secret}"
+        ]
+      }
+    }
+  }
+}

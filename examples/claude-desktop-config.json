@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "pinelabs": {
+      "command": "python",
+      "args": [
+        "-m",
+        "cli.pinelabs_mcp_server.main",
+        "stdio",
+        "--client-id",
+        "<your-client-id>",
+        "--client-secret",
+        "<your-client-secret>"
+      ]
+    }
+  }
+}

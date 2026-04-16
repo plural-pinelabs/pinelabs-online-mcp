@@ -1,0 +1,11 @@
+services:
+  pinelabs-mcp-server:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    environment:
+      PINELABS_CLIENT_ID: ${PINELABS_CLIENT_ID}
+      PINELABS_CLIENT_SECRET: ${PINELABS_CLIENT_SECRET}
+      PINELABS_BASE_URL: ${PINELABS_BASE_URL}
+      PINELABS_TOKEN_URL: ${PINELABS_TOKEN_URL}
+    command: ["stdio"]
