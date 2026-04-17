@@ -157,7 +157,7 @@
     },
     {
       "registryType": "oci",
-      "identifier": "docker.io/pinelabs/mcp-server:0.1.0",
+      "identifier": "docker.io/pinelabs/mcp:latest",
       "runtimeHint": "docker",
       "transport": {
         "type": "stdio"
