@@ -1,0 +1,51 @@
+# Pine Labs MCP Server — Cursor Rules
+
+## Project
+
+Python 3.10+ async MCP server wrapping Pine Labs payment APIs.
+FastMCP + httpx + Pydantic v2, stdio transport only.
+
+## Structure
+
+- `cli/pinelabs_mcp_server/` — CLI entry point (argparse)
+- `pkg/pinelabs/` — all tool modules, client, config, server factory
+- `pkg/pinelabs/models/` — Pydantic request models
+- `pkg/pinelabs/utils/` — validators, errors, api_docs_config
+- `pkg/toolsets/` — Toolset/ToolsetGroup abstraction
+- `tests/` — pytest async tests
+
+## Commands
+
+- `make test` — run all tests
+- `make fmt` — format with ruff
+- `make lint` — lint with ruff
+- `python -m cli.pinelabs_mcp_server.main stdio` — run server
+
+## Conventions
+
+- Async tool handlers: `async def tool_name(...) -> str`
+- Return JSON strings from tools, never raw dicts
+- Use `validate_resource_id()` / `validate_path_param()` for input validation
+- Use `api_error_response()` / `unexpected_error_response()` for errors
+- Import order: stdlib → third-party → `pkg.*`
+- One tool file per resource at `pkg/pinelabs/{resource}.py`
+- Registration function: `register_{resource}_tools(mcp, client)`
+- Tests use `fake_mcp` and `mock_client` fixtures from `conftest.py`
+- No Redis, no metrics, no tracing, no middleware
+- PineLabsClient handles OAuth2 client-credentials with in-memory cache
+
+## Error Handling
+
+```python
+try:
+    result = await client.get(f"/path/{rid}")
+    return json.dumps(result, indent=2)
+except PineLabsAPIError as e:
+    return api_error_response(e.message, e.code, e.status_code)
+except Exception as e:
+    return unexpected_error_response(e, "context")
+```
+
+## Security
+
+Follow SECURITY.md. Never log credentials or tokens. Validate all user inputs.

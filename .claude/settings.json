@@ -1,0 +1,36 @@
+{
+  "projectContext": "Pine Labs MCP Server — Python async MCP server wrapping Pine Labs payment APIs using FastMCP, httpx, and Pydantic v2. Stdio transport only.",
+  "codeStyle": {
+    "language": "python",
+    "minVersion": "3.10",
+    "importOrder": ["stdlib", "third-party", "pkg.*"],
+    "asyncFirst": true,
+    "formatter": "ruff",
+    "linter": "ruff"
+  },
+  "conventions": [
+    "Tool handlers are async functions returning JSON strings",
+    "Use validate_resource_id() and validate_path_param() for input validation",
+    "Use api_error_response() and unexpected_error_response() for error returns",
+    "One tool file per resource at pkg/pinelabs/{resource}.py",
+    "Registration function pattern: register_{resource}_tools(mcp, client)",
+    "Tests use fake_mcp and mock_client fixtures from conftest.py",
+    "No Redis, no metrics, no tracing, no HTTP server"
+  ],
+  "keyFiles": {
+    "entryPoint": "cli/pinelabs_mcp_server/main.py",
+    "client": "pkg/pinelabs/client.py",
+    "config": "pkg/pinelabs/config.py",
+    "serverFactory": "pkg/pinelabs/server.py",
+    "toolRegistration": "pkg/pinelabs/tools.py",
+    "validators": "pkg/pinelabs/utils/validators.py",
+    "errors": "pkg/pinelabs/utils/errors.py",
+    "testFixtures": "tests/conftest.py"
+  },
+  "commands": {
+    "test": "make test",
+    "format": "make fmt",
+    "lint": "make lint",
+    "run": "python -m cli.pinelabs_mcp_server.main stdio"
+  }
+}
