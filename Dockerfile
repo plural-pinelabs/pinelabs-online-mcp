@@ -18,4 +18,6 @@ COPY . .
 RUN useradd --no-create-home --shell /bin/false appuser
 USER appuser
 
+LABEL io.modelcontextprotocol.server.name="io.github.plural-pinelabs/pinelabs-online-mcp"
+
 ENTRYPOINT ["python", "-m", "cli.pinelabs_mcp_server.main", "stdio"]
