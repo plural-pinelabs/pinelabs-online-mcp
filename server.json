@@ -3,7 +3,7 @@
   "name": "io.github.plural-pinelabs/pinelabs-online-mcp",
   "title": "PineLabs Plural PG — Payment Gateway MCP Server",
   "description": "Create payment orders, checkout, subscriptions & UPI via PineLabs Plural PG gateway",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "websiteUrl": "https://developer.pinelabsonline.com",
   "repository": {
     "url": "https://github.com/plural-pinelabs/pinelabs-online-mcp",
@@ -121,7 +121,7 @@
     {
       "registryType": "pypi",
       "identifier": "pinelabs-mcp-server",
-      "version": "0.1.0",
+      "version": "0.1.2",
       "runtimeHint": "uvx",
       "transport": {
         "type": "stdio"
