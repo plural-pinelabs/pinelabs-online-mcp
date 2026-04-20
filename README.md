@@ -2,18 +2,24 @@
 
 <!-- mcp-name: io.github.plural-pinelabs/pinelabs-online-mcp -->
 
-Pine Labs MCP Server is a production-grade [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server that connects AI assistants and agentic applications to the Pine Labs payment gateway. It exposes Pine Labs' online payment APIs -- payment links, checkout orders, UPI intent payments, subscriptions, and transaction reporting -- as structured MCP tools that any compatible AI client can invoke.
+[![npm package](https://img.shields.io/npm/v/pinelabs-mcp.svg)](https://www.npmjs.com/package/pinelabs-mcp)
 
-Built for fintech developers integrating payment gateway capabilities into AI-driven workflows, this server enables programmatic access to the full Pine Labs payment API surface through natural-language AI interfaces such as VS Code Copilot, Claude Desktop, and Cursor.
+MCP client for Pine Labs payment gateway -- connect Claude Desktop, Cursor, VS Code, and other AI assistants to Pine Labs payment APIs using your client credentials.
+
+[Full Documentation](#available-tools) | [Available Tools](#available-tools) | [Use Cases](#use-cases) | [FAQs](#faq)
 
 ---
 
 ## Table of Contents
 
+- [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
+- [CLI Commands](#cli-commands)
+- [Supported AI Clients](#supported-ai-clients)
+- [Manual Configuration](#manual-configuration)
 - [Available Tools](#available-tools)
 - [Use Cases](#use-cases)
-- [Remote MCP Server (Recommended)](#remote-mcp-server-recommended)
+- [Remote MCP Server](#remote-mcp-server)
 - [Authentication](#authentication)
 - [Local MCP Server](#local-mcp-server)
 - [Configuration](#configuration)
@@ -24,12 +30,81 @@ Built for fintech developers integrating payment gateway capabilities into AI-dr
 
 ---
 
+## Prerequisites
+
+- **Node.js 18+** -- [Download](https://nodejs.org/) or install npm i pinelabs-mcp
+- **Pine Labs Client Credentials** -- Get your Client ID and Client Secret from the [Pine Labs developer portal](https://developer.pinelabsonline.com/docs/mcp-server-overview)
+
+---
+
 ## Quick Start
 
-Choose your preferred deployment method:
+```bash
+# 1. Configure your credentials
+npx pinelabs-mcp configure --client-id=YOUR_ID --client-secret=YOUR_SECRET
 
-- **[Remote MCP Server](#remote-mcp-server-recommended)** -- Hosted by Pine Labs. No local setup required.
-- **[Local MCP Server](#local-mcp-server)** -- Self-hosted via Docker or source. Full control over your infrastructure.
+# 2. Test your connection
+npx pinelabs-mcp test
+
+# 3. Auto-configure your AI client
+npx pinelabs-mcp setup cursor       # or: claude-desktop, vscode, windsurf, opencode, copilot, codex
+```
+
+Then restart your AI client and start using Pine Labs tools.
+
+---
+
+## CLI Commands
+
+```
+pinelabs-mcp start                             Start MCP server (stdio mode)
+pinelabs-mcp configure                         Interactive credential setup
+pinelabs-mcp configure --client-id=X --client-secret=Y [--env=uat|prod]
+pinelabs-mcp test                              Test connectivity and credentials
+pinelabs-mcp setup <client>                    Auto-configure an AI client
+pinelabs-mcp setup <client> --local            Use local path (dev mode)
+pinelabs-mcp setup <client> --print            Preview config without writing
+pinelabs-mcp status                            Show current configuration
+pinelabs-mcp help                              Show help message
+pinelabs-mcp --version                         Show version
+```
+
+---
+
+## Supported AI Clients
+
+| Client | Command | Config Path |
+|:-------|:--------|:------------|
+| Claude Desktop | `setup claude-desktop` | Platform-specific Claude config |
+| Cursor | `setup cursor` | `~/.cursor/mcp.json` |
+| VS Code | `setup vscode` | `.vscode/mcp.json` (project) |
+| Windsurf | `setup windsurf` | `~/.codeium/windsurf/mcp_config.json` |
+| OpenCode | `setup opencode` | `.opencode/config.json` (project) |
+| GitHub Copilot | `setup copilot` | `~/.copilot/mcp-config.json` |
+| OpenAI Codex | `setup codex` | `.codex/config.toml` |
+
+---
+
+## Manual Configuration
+
+If you prefer to configure manually instead of using `npx pinelabs-mcp setup`, add the following to your AI client's MCP config:
+
+```json
+{
+  "mcpServers": {
+    "pinelabs": {
+      "command": "npx",
+      "args": ["-y", "pinelabs-mcp"],
+      "env": {
+        "PINELABS_CLIENT_ID": "your_client_id",
+        "PINELABS_CLIENT_SECRET": "your_client_secret"
+      }
+    }
+  }
+}
+```
+
+> **Note:** VS Code uses `"servers"` instead of `"mcpServers"` as the top-level key. For production environment, add `"PINELABS_ENV": "prod"` to the `env` block.
 
 ---
 
@@ -130,9 +205,9 @@ The Pine Labs MCP Server exposes 50+ tools across multiple categories. Each tool
 
 ---
 
-## Remote MCP Server (Recommended)
+## Remote MCP Server
 
-The Remote MCP Server is hosted and maintained by Pine Labs. It provides instant access to all payment gateway APIs with no local infrastructure required.
+The Remote MCP Server is hosted and maintained by Pine Labs. Use this approach if you prefer to configure your AI client manually with the remote endpoint instead of using the [npm CLI](#quick-start).
 
 ### Benefits
 
