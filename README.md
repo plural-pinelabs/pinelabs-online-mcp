@@ -283,6 +283,51 @@ Deploy the MCP server on your own infrastructure for full control over the runti
 - Docker (optional, for containerized deployment)
 - Git
 
+### Install on Windows (Chocolatey)
+
+The fastest way to get the MCP server on a Windows machine is via [Chocolatey](https://chocolatey.org/). The package is a thin wrapper that installs Python 3.10+ as a dependency and then installs `pinelabs-mcp-server` from PyPI, registering a `pinelabs-mcp` shim on `PATH`.
+
+```powershell
+choco install pinelabs-mcp
+```
+
+Verify the install:
+
+```powershell
+pinelabs-mcp --help
+```
+
+Run the server over stdio:
+
+```powershell
+pinelabs-mcp stdio --client-id <your-client-id> --client-secret <your-client-secret> --env uat
+```
+
+#### MCP client configuration (Claude Desktop / Cursor / VS Code)
+
+After `choco install`, point your MCP client at the `pinelabs-mcp` shim:
+
+```json
+{
+  "mcpServers": {
+    "pinelabs": {
+      "command": "pinelabs-mcp",
+      "args": ["stdio", "--env", "uat"],
+      "env": {
+        "PINELABS_CLIENT_ID": "<your-client-id>",
+        "PINELABS_CLIENT_SECRET": "<your-client-secret>"
+      }
+    }
+  }
+}
+```
+
+To uninstall:
+
+```powershell
+choco uninstall pinelabs-mcp
+```
+
 ### Using Public Docker Image (Recommended)
 
 Use the official Pine Labs Docker image directly. No build step required.

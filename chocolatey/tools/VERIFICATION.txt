@@ -1,0 +1,47 @@
+VERIFICATION
+============
+
+Package:        pinelabs-mcp
+Version:        0.1.2
+Maintainer:     pinelabs-mcp (https://community.chocolatey.org/profiles/pinelabs-mcp)
+Software:       Pine Labs MCP Server (official, by Pine Labs)
+Upstream src:   https://github.com/plural-pinelabs/pinelabs-online-mcp
+Upstream PyPI:  https://pypi.org/project/pinelabs-mcp-server/0.1.2/
+License:        Apache License 2.0 (see LICENSE.txt in this folder; verbatim
+                copy of https://github.com/plural-pinelabs/pinelabs-online-mcp/blob/main/LICENSE)
+
+What this package does
+----------------------
+This Chocolatey package is a thin wrapper. It does NOT embed any Pine Labs
+binaries. The install script:
+
+  1. Verifies Python 3.10+ (installed automatically via the `python3` Chocolatey
+     dependency declared in the .nuspec).
+  2. Runs:  python -m pip install --upgrade pinelabs-mcp-server==0.1.2
+     fetching the package from the official Python Package Index (PyPI).
+  3. Registers a Chocolatey shim named `pinelabs-mcp` that points at the
+     `pinelabs-mcp-server.exe` entrypoint installed by pip.
+
+How to verify the upstream artifact
+-----------------------------------
+On any machine with Python 3.10+:
+
+    python -m pip download pinelabs-mcp-server==0.1.2 --no-deps -d .\verify
+
+Then compare the downloaded wheel's SHA-256 against the digest published by
+PyPI for version 0.1.2 at:
+
+    https://pypi.org/project/pinelabs-mcp-server/0.1.2/#files
+
+The sources for the upstream package (and this Chocolatey wrapper) are public
+at: https://github.com/plural-pinelabs/pinelabs-online-mcp
+
+How to verify the install scripts in this package
+-------------------------------------------------
+The PowerShell scripts under tools\ are short and human-readable. Their source
+of truth lives at:
+
+    https://github.com/plural-pinelabs/pinelabs-online-mcp/tree/main/chocolatey
+
+Diff the contents of this .nupkg against that path on the tagged release
+matching the package version.
