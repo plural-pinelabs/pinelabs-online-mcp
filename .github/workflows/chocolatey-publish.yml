@@ -1,0 +1,72 @@
+name: Publish Chocolatey Package
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Package version to pack/push (must match nuspec/PyPI). Example: 0.1.2"
+        required: true
+        default: "0.1.2"
+      dry_run:
+        description: "Dry run: pack + local install/uninstall only, no push to community.chocolatey.org"
+        required: true
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+
+jobs:
+  publish:
+    name: Pack, validate, and (optionally) push
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show choco version
+        shell: pwsh
+        run: choco --version
+
+      - name: Pack
+        shell: pwsh
+        working-directory: chocolatey
+        run: |
+          choco pack pinelabs-mcp.nuspec --version=${{ inputs.version }}
+          Get-ChildItem -Filter *.nupkg
+
+      - name: Local install validation
+        shell: pwsh
+        working-directory: chocolatey
+        run: |
+          $nupkg = Get-ChildItem -Filter "pinelabs-mcp.${{ inputs.version }}.nupkg" | Select-Object -First 1
+          if (-not $nupkg) { throw "nupkg not found after pack." }
+          choco install pinelabs-mcp --version=${{ inputs.version }} -s "$PWD;https://community.chocolatey.org/api/v2/" -y --no-progress
+          if ($LASTEXITCODE -ne 0) { throw "choco install failed." }
+          refreshenv
+          pinelabs-mcp --help
+          if ($LASTEXITCODE -ne 0) { throw "pinelabs-mcp --help failed." }
+
+      - name: Local uninstall validation
+        shell: pwsh
+        run: |
+          choco uninstall pinelabs-mcp -y --no-progress
+          if ($LASTEXITCODE -ne 0) { throw "choco uninstall failed." }
+
+      - name: Upload nupkg artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pinelabs-mcp-${{ inputs.version }}-nupkg
+          path: chocolatey/*.nupkg
+
+      - name: Push to community.chocolatey.org
+        if: ${{ inputs.dry_run == 'false' }}
+        shell: pwsh
+        working-directory: chocolatey
+        env:
+          CHOCO_API_KEY: ${{ secrets.CHOCO_API_KEY }}
+        run: |
+          if (-not $env:CHOCO_API_KEY) { throw "CHOCO_API_KEY secret is not configured." }
+          choco apikey --key $env:CHOCO_API_KEY --source https://push.chocolatey.org/
+          choco push "pinelabs-mcp.${{ inputs.version }}.nupkg" --source https://push.chocolatey.org/
