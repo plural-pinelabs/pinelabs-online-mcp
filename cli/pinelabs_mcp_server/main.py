@@ -85,7 +85,7 @@ def _build_parser() -> argparse.ArgumentParser:
     _add_common_args(http)
     http.add_argument(
         "--host",
-        default=os.environ.get("HOST", "0.0.0.0"),
+        default=os.environ.get("HOST", "0.0.0.0"),  # noqa: S104 - server is intended to listen on all interfaces; override via --host or HOST env
         help="Host to bind to (default: 0.0.0.0)",
     )
     http.add_argument(
