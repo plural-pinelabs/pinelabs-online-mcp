@@ -61,7 +61,3 @@ md_files/
 secrets.*
 *.cert
 id_rsa*
-
-# Chocolatey build artifacts
-chocolatey/*.nupkg
-
