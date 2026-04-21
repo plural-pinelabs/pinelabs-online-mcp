@@ -11,7 +11,7 @@ from pkg.pinelabs.config import Settings
 def run_http_server(
     settings: Settings,
     *,
-    host: str = "0.0.0.0",
+    host: str = "0.0.0.0",  # noqa: S104 - server is intended to listen on all interfaces; override via --host
     port: int = 8000,
     read_only: bool = False,
     enabled_toolsets: list[str] | None = None,
