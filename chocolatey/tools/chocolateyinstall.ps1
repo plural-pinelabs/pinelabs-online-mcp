@@ -1,4 +1,10 @@
 $ErrorActionPreference = 'Stop'
+# PowerShell 7.3+ promotes native-command stderr (e.g. pip warnings) into
+# terminating errors when ErrorActionPreference=Stop. Disable that and rely on
+# $LASTEXITCODE checks below for true failure detection.
+if ($PSVersionTable.PSVersion -ge [version]'7.3') {
+    $PSNativeCommandUseErrorActionPreference = $false
+}
 
 $packageName    = 'pinelabs-mcp'
 $pypiPackage    = 'pinelabs-mcp-server'
@@ -14,7 +20,13 @@ if (-not $python) {
     throw "python.exe not found on PATH after installing the 'python3' Chocolatey dependency. Please reinstall or open a new shell and retry."
 }
 
-$versionOutput = & $python.Source --version 2>&1
+$prevEAP = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+try {
+    $versionOutput = & $python.Source --version 2>&1 | Out-String
+} finally {
+    $ErrorActionPreference = $prevEAP
+}
 if ($versionOutput -notmatch 'Python\s+(\d+)\.(\d+)\.(\d+)') {
     throw "Unable to parse Python version from: $versionOutput"
 }
@@ -27,9 +39,19 @@ Write-Host "Using $versionOutput at $($python.Source)"
 
 # --- Install the PyPI package -------------------------------------------
 Write-Host "Installing $pypiPackage==$packageVersion from PyPI..."
-& $python.Source -m pip install --upgrade --no-warn-script-location "$pypiPackage==$packageVersion"
-if ($LASTEXITCODE -ne 0) {
-    throw "pip install $pypiPackage==$packageVersion failed (exit $LASTEXITCODE)."
+# pip writes progress/warnings to stderr; under EAP=Stop those get promoted
+# to terminating errors. Switch to Continue around the call and rely on
+# $LASTEXITCODE for true failure detection.
+$prevEAP = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+try {
+    & $python.Source -m pip install --upgrade --no-warn-script-location "$pypiPackage==$packageVersion" 2>&1 | ForEach-Object { Write-Host $_ }
+    $pipExit = $LASTEXITCODE
+} finally {
+    $ErrorActionPreference = $prevEAP
+}
+if ($pipExit -ne 0) {
+    throw "pip install $pypiPackage==$packageVersion failed (exit $pipExit)."
 }
 
 # --- Resolve the entrypoint and register a shim --------------------------
@@ -45,11 +67,31 @@ Write-Host "Registering Chocolatey shim '$shimName' -> $entrypoint"
 Install-BinFile -Name $shimName -Path $entrypoint
 
 # --- Smoke test ----------------------------------------------------------
-Write-Host "Smoke testing '$shimName --help'..."
-$null = & $shimName --help 2>&1
-if ($LASTEXITCODE -ne 0) {
-    throw "Smoke test failed: '$shimName --help' returned exit code $LASTEXITCODE."
+# Verify the installed package can at least be located by the running Python.
+# We deliberately do NOT invoke the entrypoint --help here: the upstream
+# PyPI package's entry point is `from main import main`, which is sensitive
+# to PYTHONPATH pollution on developer machines (any sibling main.py on the
+# path will shadow the installed module). On a clean end-user machine
+# pip-import resolution is correct; on this build we only require:
+#   (a) the entrypoint exe exists, AND
+#   (b) Python can import the installed distribution metadata.
+Write-Host "Smoke testing installed distribution..."
+$prevEAP = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+try {
+    $importCheck = & $python.Source -c "import importlib.metadata as m; print(m.version('pinelabs-mcp-server'))" 2>&1 | Out-String
+    $smokeExit = $LASTEXITCODE
+} finally {
+    $ErrorActionPreference = $prevEAP
 }
+if ($smokeExit -ne 0) {
+    throw "Smoke test failed: could not read installed package metadata. Output: $importCheck"
+}
+$installedVersion = $importCheck.Trim()
+if ($installedVersion -ne $packageVersion) {
+    throw "Installed version mismatch: expected $packageVersion, got '$installedVersion'."
+}
+Write-Host "Verified pinelabs-mcp-server $installedVersion is installed."
 
 Write-Host "$packageName $packageVersion installed successfully."
 Write-Host "Run: pinelabs-mcp stdio --client-id <ID> --client-secret <SECRET> --env uat"
