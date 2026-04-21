@@ -28,11 +28,15 @@ This Chocolatey package is a thin wrapper that:
 
 * Installs Python 3.10+ (via the `python3` Chocolatey dependency).
 * Installs the official `pinelabs-mcp-server` distribution from PyPI.
-* Registers a `pinelabs-mcp` shim on PATH so MCP clients can launch the server.
+* Registers a `pinelabs-mcp-server` shim on PATH so MCP clients can launch the server.
 
 Usage after install:
 
-    pinelabs-mcp stdio --client-id <ID> --client-secret <SECRET> --env uat
+    pinelabs-mcp-server stdio --client-id <ID> --client-secret <SECRET> --env uat
+
+Note: this `pinelabs-mcp-server` command is the raw Python stdio server. For a
+higher-level CLI with `configure`, `setup &lt;client&gt;`, and `test` subcommands,
+install the npm package instead: `npm install -g pinelabs-mcp`.
 
 For full configuration, MCP client setup, and tool reference, see:
 https://github.com/plural-pinelabs/pinelabs-online-mcp

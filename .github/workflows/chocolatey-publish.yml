@@ -45,8 +45,8 @@ jobs:
           choco install pinelabs-mcp --version=${{ inputs.version }} -s "$PWD;https://community.chocolatey.org/api/v2/" -y --no-progress
           if ($LASTEXITCODE -ne 0) { throw "choco install failed." }
           refreshenv
-          pinelabs-mcp --help
-          if ($LASTEXITCODE -ne 0) { throw "pinelabs-mcp --help failed." }
+          pinelabs-mcp-server --help
+          if ($LASTEXITCODE -ne 0) { throw "pinelabs-mcp-server --help failed." }
 
       - name: Local uninstall validation
         shell: pwsh

@@ -19,8 +19,10 @@ binaries. The install script:
      dependency declared in the .nuspec).
   2. Runs:  python -m pip install --upgrade pinelabs-mcp-server==0.1.2
      fetching the package from the official Python Package Index (PyPI).
-  3. Registers a Chocolatey shim named `pinelabs-mcp` that points at the
-     `pinelabs-mcp-server.exe` entrypoint installed by pip.
+  3. Registers a Chocolatey shim named `pinelabs-mcp-server` that points at the
+     `pinelabs-mcp-server.exe` entrypoint installed by pip. (The shim name is
+     deliberately distinct from the npm `pinelabs-mcp` package's command so the
+     two can coexist on PATH without collision.)
 
 How to verify the upstream artifact
 -----------------------------------
