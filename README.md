@@ -35,15 +35,17 @@ MCP client for Pine Labs payment gateway -- connect Claude Desktop, Cursor, VS C
 - **Node.js 18+** -- [Download](https://nodejs.org/) or install npm i pinelabs-mcp
 - **Pine Labs Client Credentials** -- Get your Client ID and Client Secret from the [Pine Labs developer portal](https://developer.pinelabsonline.com/docs/mcp-server-overview)
 
+---
+
+## Quick Start
+
 ### Getting Your Credentials
 
 1. Sign up or log in to the Pine Labs [merchant dashboard](https://dashboardv2.pluralonline.com/signup) provided with your account.
 2. Navigate to your account settings to locate your **Client ID** and **Client Secret**.
 3. Use these credentials in the MCP server configuration as shown in the setup instructions above.
 
----
-
-## Quick Start
+### Configure and Connect
 
 ```bash
 # 1. Configure your credentials
