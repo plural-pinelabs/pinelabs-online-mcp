@@ -41,7 +41,7 @@ MCP client for Pine Labs payment gateway -- connect Claude Desktop, Cursor, VS C
 
 ### Getting Your Credentials
 
-1. Sign up or log in to the Pine Labs [merchant dashboard](https://dashboardv2.pluralonline.com/signup) provided with your account.
+1. Sign up or log in to the Pine Labs <a href="https://dashboardv2.pluralonline.com/signup" target="_blank">merchant dashboard</a> provided with your account.
 2. Navigate to your account settings to locate your **Client ID** and **Client Secret**.
 3. Use these credentials in the MCP server configuration as shown in the setup instructions above.
 
