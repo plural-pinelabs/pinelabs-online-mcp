@@ -121,7 +121,7 @@
     {
       "registryType": "pypi",
       "identifier": "pinelabs-mcp-server",
-      "version": "0.1.2",
+"version": "0.1.2",
       "runtimeHint": "uvx",
       "transport": {
         "type": "stdio"
