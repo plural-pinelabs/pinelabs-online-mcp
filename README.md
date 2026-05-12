@@ -122,6 +122,7 @@ The Pine Labs MCP Server exposes 50+ tools across multiple categories. Each tool
 
 ### Payment Links
 
+
 | Tool | Description | API Reference |
 |:-----|:------------|:--------------|
 | `create_payment_link` | Create a new payment link for collecting payments | [Payment Link - Create](https://developer.pinelabsonline.com/reference/payment-link-create) |
@@ -135,13 +136,55 @@ The Pine Labs MCP Server exposes 50+ tools across multiple categories. Each tool
 | Tool | Description | API Reference |
 |:-----|:------------|:--------------|
 | `get_order_by_order_id` | Retrieve order details by order ID | [Order - Get by ID](https://developer.pinelabsonline.com/reference/orders-get-by-order-id) |
+| `get_order_by_merchant_order_reference` | Retrieve order details by merchant order reference | [Order - Get by Merchant Reference](https://developer.pinelabsonline.com/reference/orders-get-by-merchant-order-reference) |
+| `capture_order` | Capture a previously authorized payment against an order | [Order - Capture](https://developer.pinelabsonline.com/reference/orders-capture) |
 | `cancel_order` | Cancel a pre-authorized payment against an order | [Order - Cancel](https://developer.pinelabsonline.com/reference/orders-cancel) |
+| `fetch_order_payments` | Fetch all payment attempts associated with an order | [Order - Get Payments](https://developer.pinelabsonline.com/reference/orders-get-payments) |
 
 ### Checkout Orders
 
 | Tool | Description | API Reference |
 |:-----|:------------|:--------------|
 | `create_order` | Create a new checkout order and generate a checkout link | [Order - Create](https://developer.pinelabsonline.com/reference/orders-create) |
+
+### Card Payments
+
+| Tool | Description | API Reference |
+|:-----|:------------|:--------------|
+| `create_card_payment` | Create a server-to-server card payment against an order | [Card Payment - Create](https://developer.pinelabsonline.com/reference/payments-create-card-payment) |
+| `get_card_details` | Retrieve card details (BIN, network, type) for a card number | [Card Details - Get](https://developer.pinelabsonline.com/reference/get-card-details) |
+
+### OTP
+
+| Tool | Description | API Reference |
+|:-----|:------------|:--------------|
+| `generate_otp` | Generate an OTP for a card payment authentication flow | [OTP - Generate](https://developer.pinelabsonline.com/reference/generate-otp) |
+| `submit_otp` | Submit an OTP to complete a card payment authentication | [OTP - Submit](https://developer.pinelabsonline.com/reference/submit-otp) |
+| `resend_otp` | Resend an OTP for a card payment authentication | [OTP - Resend](https://developer.pinelabsonline.com/reference/resend-otp) |
+
+### Refunds
+
+| Tool | Description | API Reference |
+|:-----|:------------|:--------------|
+| `create_refund` | Initiate a full or partial refund against a captured payment | [Refund - Create](https://developer.pinelabsonline.com/reference/refund-create) |
+
+### Settlements
+
+| Tool | Description | API Reference |
+|:-----|:------------|:--------------|
+| `get_all_settlements` | Retrieve all settlements for the merchant within a date range | [Settlements - Get All](https://developer.pinelabsonline.com/reference/get-all-settlements) |
+| `get_settlement_by_utr` | Retrieve a specific settlement by its UTR (Unique Transaction Reference) | [Settlement - Get by UTR](https://developer.pinelabsonline.com/reference/get-settlement-by-utr) |
+
+### Payouts
+
+| Tool | Description | API Reference |
+|:-----|:------------|:--------------|
+| `create_payout` | Create a payout to disburse funds to a beneficiary | [Payout - Create](https://developer.pinelabsonline.com/reference/create-payout) |
+| `get_payout_details` | Retrieve details of a payout by payout ID | [Payout - Get](https://developer.pinelabsonline.com/reference/get-payout) |
+| `get_payout_payments` | List payments associated with a payout | [Payout - Get Payments](https://developer.pinelabsonline.com/reference/get-payout-payments) |
+| `get_payout_balance` | Retrieve the available payout balance for the merchant | [Payout - Get Balance](https://developer.pinelabsonline.com/reference/get-payout-balance) |
+| `update_payout` | Update an existing payout request | [Payout - Update](https://developer.pinelabsonline.com/reference/update-payout) |
+| `cancel_payout` | Cancel a pending payout request | [Payout - Cancel](https://developer.pinelabsonline.com/reference/cancel-payout) |
 
 ### Subscriptions
 
@@ -185,12 +228,14 @@ The Pine Labs MCP Server exposes 50+ tools across multiple categories. Each tool
 | `get_refund_order_details` | Fetch refund order details within a date range | [API Docs](https://developer.pinelabsonline.com/docs/mcp-server-overview) |
 | `search_transaction` | Search for a transaction by transaction ID | [API Docs](https://developer.pinelabsonline.com/docs/mcp-server-overview) |
 
-### API Documentation
+### Developer Tools
 
 | Tool | Description |
 |:-----|:------------|
 | `get_api_documentation` | Fetch Pine Labs API documentation for a specific API |
-| `list_pinelabs_apis` | List all available Pine Labs APIs with descriptions |
+| `list_plural_apis` | List all available Pine Labs (Plural) APIs with descriptions |
+| `detect_stack` | Detect the technology stack of the current project to tailor integration guidance |
+| `integrate_pinelabs_checkout` | Generate stack-aware code snippets and integration guidance for Pine Labs Checkout |
 
 ### Merchant Analytics
 
