@@ -19,7 +19,9 @@ PAYMENT_LINK_NOTIFY = "/pay/v1/paymentlink/{payment_link_id}/notify"
 # ---------------------------------------------------------------------------
 ORDER_CREATE = "/pay/v1/orders"
 ORDER_GET = "/pay/v1/orders/{order_id}"
+ORDER_GET_BY_REF = "/pay/v1/orders/reference/{merchant_order_reference}"
 ORDER_CANCEL = "/pay/v1/orders/{order_id}/cancel"
+ORDER_CAPTURE = "/pay/v1/orders/{order_id}/capture"
 ORDER_PAYMENTS = "/pay/v1/orders/{order_id}/payments"
 
 # ---------------------------------------------------------------------------
@@ -78,12 +80,52 @@ SUBSCRIPTION_EXECUTE = f"{_SUB_PREFIX}/subscriptions/execute"
 MANDATE_MERCHANT_RETRY = "/v1/mandate/merchant-retry"
 
 # ---------------------------------------------------------------------------
+# Refunds  (/pay/v1/refunds)
+# ---------------------------------------------------------------------------
+REFUND_CREATE = "/pay/v1/refunds/{order_id}"
+
+# ---------------------------------------------------------------------------
+# Card Payments  (/pay/v1/orders/{order_id}/payments)
+# ---------------------------------------------------------------------------
+CARD_PAYMENT_CREATE = "/pay/v1/orders/{order_id}/payments"
+
+# ---------------------------------------------------------------------------
+# Card Details  (/pay/v1/getCardDetails)
+# ---------------------------------------------------------------------------
+CARD_DETAILS_GET = "/pay/v1/getCardDetails"
+
+# ---------------------------------------------------------------------------
+# OTP  (/pay/v1/otp/...)
+# ---------------------------------------------------------------------------
+OTP_GENERATE = "/pay/v1/otp/generate"
+OTP_SUBMIT = "/pay/v1/otp/submit"
+OTP_RESEND = "/pay/v1/otp/resend"
+
+# ---------------------------------------------------------------------------
+# Settlements  (/settlements/v1/...)
+# ---------------------------------------------------------------------------
+SETTLEMENT_LIST = "/settlements/v1/list"
+SETTLEMENT_DETAIL = "/settlements/v1/detail/{utr}"
+
+# ---------------------------------------------------------------------------
+# Payouts  (/payouts/v3/...)
+# ---------------------------------------------------------------------------
+PAYOUT_CREATE = "/payouts/v3/payments/banks"
+PAYOUT_LIST = "/payouts/v3/payments"
+PAYOUT_BALANCE = "/payouts/v3/payments/funding-account"
+PAYOUT_UPDATE = "/payouts/v3/payments/banks/{payment_reference_id}"
+PAYOUT_CANCEL = (
+    "/payouts/v3/payments/banks/{payment_reference_id}/cancel"
+)
+
+# ---------------------------------------------------------------------------
 # MCP API / Reports  (/mcp/v1/...)
 # ---------------------------------------------------------------------------
 MCP_PAYMENT_LINK_DETAILS = "/mcp/v1/payment-link/details"
 MCP_ORDER_DETAILS = "/mcp/v1/order/details"
 MCP_REFUND_ORDER_DETAILS = "/mcp/v1/refund/order/details"
 MCP_SEARCH_TRANSACTION = "/mcp/v1/search/transaction/{transaction_id}"
+MCP_PAYOUT_DETAILS = "/mcp/v1/payout/details"
 
 # ---------------------------------------------------------------------------
 # Success Rate  (/mcp/v1/merchant/...)
