@@ -314,7 +314,7 @@ def _detect_project_stack(
 # ===================================================================
 
 _PINELABS_CLIENT_ID_PLACEHOLDER = "YOUR_PINELABS_CLIENT_ID"
-_PINELABS_CLIENT_SECRET_PLACEHOLDER = "YOUR_PINELABS_CLIENT_SECRET"
+_PINELABS_CLIENT_SECRET_PLACEHOLDER = "YOUR_PINELABS_CLIENT_SECRET"  # noqa: S105 - placeholder string emitted in code samples, not a real secret
 
 _TEST_INSTRUCTIONS = (
     "Use the Pine Labs UAT sandbox for testing.\n"
