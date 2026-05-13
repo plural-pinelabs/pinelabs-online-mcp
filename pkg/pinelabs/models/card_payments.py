@@ -31,9 +31,9 @@ class PaymentAmount(BaseModel):
 
 
 class TokenTxnType(str, Enum):
-    ALT_TOKEN = "ALT_TOKEN"
-    NETWORK_TOKEN = "NETWORK_TOKEN"
-    ISSUER_TOKEN = "ISSUER_TOKEN"
+    ALT_TOKEN = "ALT_TOKEN"  # noqa: S105 - enum identifier, not a credential
+    NETWORK_TOKEN = "NETWORK_TOKEN"  # noqa: S105 - enum identifier, not a credential
+    ISSUER_TOKEN = "ISSUER_TOKEN"  # noqa: S105 - enum identifier, not a credential
 
 
 class CardData(BaseModel):
