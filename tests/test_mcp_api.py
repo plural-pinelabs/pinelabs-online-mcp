@@ -370,7 +370,7 @@ class TestMcpApiValidation:
 # ---------------------------------------------------------------------------
 
 class TestToolRegistration:
-    def test_all_five_tools_registered(self):
+    def test_all_tools_registered(self):
         client = PineLabsClient(base_url="https://fake.test/api", token_url="https://fake.test/api/auth/v1/token", client_id="test-id", client_secret="test-secret")
         tools = _make_tools(client)
         expected_tools = {
@@ -378,5 +378,105 @@ class TestToolRegistration:
             "get_order_details",
             "get_refund_order_details",
             "search_transaction",
+            "get_payout_details",
         }
         assert set(tools.keys()) == expected_tools
+
+
+# ---------------------------------------------------------------------------
+# get_payout_details
+# ---------------------------------------------------------------------------
+
+class TestGetPayoutDetails:
+    @pytest.fixture
+    def client(self):
+        c = PineLabsClient(
+            base_url="https://fake.test/api",
+            token_url="https://fake.test/api/auth/v1/token",
+            client_id="test-id",
+            client_secret="test-secret",
+        )
+        c.get = AsyncMock(return_value={"data": [{"id": "po-1", "status": "PROCESSED"}]})
+        return c
+
+    @pytest.mark.asyncio
+    async def test_success_minimal(self, client):
+        tools = _make_tools(client)
+        result = await tools["get_payout_details"](
+            merchant_id="merchant-123",
+            start_date="2024-10-01T00:00:00",
+            end_date="2024-10-09T23:59:59",
+        )
+        data = json.loads(result)
+        assert "data" in data
+        client.get.assert_awaited_once()
+        call_args = client.get.call_args
+        assert call_args[0][0] == "/mcp/v1/payout/details"
+        assert call_args[1]["extra_headers"] == {"merchant-id": "merchant-123"}
+        params = call_args[1]["params"]
+        assert params["start_date"] == "2024-10-01T00:00:00"
+        assert params["end_date"] == "2024-10-09T23:59:59"
+
+    @pytest.mark.asyncio
+    async def test_success_with_pagination(self, client):
+        tools = _make_tools(client)
+        result = await tools["get_payout_details"](
+            merchant_id="merchant-123",
+            start_date="2024-10-01T00:00:00",
+            end_date="2024-10-09T23:59:59",
+            page=2,
+            per_page=10,
+        )
+        data = json.loads(result)
+        assert "data" in data
+        params = client.get.call_args[1]["params"]
+        assert params["page"] == "2"
+        assert params["per_page"] == "10"
+
+    @pytest.mark.asyncio
+    async def test_missing_merchant_id(self, client):
+        tools = _make_tools(client)
+        result = await tools["get_payout_details"](
+            merchant_id="",
+            start_date="2024-10-01T00:00:00",
+            end_date="2024-10-09T23:59:59",
+        )
+        data = json.loads(result)
+        assert data["code"] == "VALIDATION_ERROR"
+
+    @pytest.mark.asyncio
+    async def test_invalid_date_range(self, client):
+        tools = _make_tools(client)
+        result = await tools["get_payout_details"](
+            merchant_id="merchant-123",
+            start_date="2024-10-09T00:00:00",
+            end_date="2024-10-01T00:00:00",
+        )
+        data = json.loads(result)
+        assert data["code"] == "VALIDATION_ERROR"
+
+    @pytest.mark.asyncio
+    async def test_api_error(self, client):
+        client.get = AsyncMock(
+            side_effect=PineLabsAPIError(status_code=502, code="UPSTREAM", message="upstream")
+        )
+        tools = _make_tools(client)
+        result = await tools["get_payout_details"](
+            merchant_id="merchant-123",
+            start_date="2024-10-01T00:00:00",
+            end_date="2024-10-09T23:59:59",
+        )
+        data = json.loads(result)
+        assert data["code"] == "UPSTREAM"
+
+    @pytest.mark.asyncio
+    async def test_unexpected_error(self, client):
+        client.get = AsyncMock(side_effect=RuntimeError("boom"))
+        tools = _make_tools(client)
+        result = await tools["get_payout_details"](
+            merchant_id="merchant-123",
+            start_date="2024-10-01T00:00:00",
+            end_date="2024-10-09T23:59:59",
+        )
+        data = json.loads(result)
+        assert data["code"] == "INTERNAL_ERROR"
