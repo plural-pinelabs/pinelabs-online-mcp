@@ -317,3 +317,78 @@ def register_mcp_api_tools(
             return unexpected_error_response(
                 e, "searching transaction",
             )
+
+    @mcp.tool(
+        name="get_payout_details",
+        description=(
+            "Fetch payout details within a date range from Pine "
+            "Labs. Returns payout information including status, "
+            "amounts, and metadata. Max date range is 60 days. "
+            "Requires merchant_id."
+        ),
+    )
+    async def get_payout_details(
+        merchant_id: str,
+        start_date: str,
+        end_date: str,
+        page: Optional[int] = None,
+        per_page: Optional[int] = None,
+    ) -> str:
+        """Fetch payout details within a date range.
+
+        Args:
+            merchant_id: Merchant identifier for the request.
+            start_date: Start date in ISO 8601 format
+                (e.g., 2024-10-01T00:00:00). Max range 60 days.
+            end_date: End date in ISO 8601 format
+                (e.g., 2024-10-09T23:59:59).
+            page: Page number to retrieve.
+            per_page: Number of records per page.
+        """
+        mid_err = _validate_merchant_id(merchant_id)
+        if mid_err:
+            return validation_error_response(mid_err)
+
+        date_err = _validate_date_range(start_date, end_date)
+        if date_err:
+            return validation_error_response(date_err)
+
+        pag_err = _validate_pagination(page, per_page)
+        if pag_err:
+            return validation_error_response(pag_err)
+
+        params: dict[str, str] = {
+            "start_date": start_date,
+            "end_date": end_date,
+        }
+        if page is not None:
+            params["page"] = str(page)
+        if per_page is not None:
+            params["per_page"] = str(per_page)
+
+        try:
+            logger.info(
+                "Fetching payout details: merchant_id=%s "
+                "start_date=%s end_date=%s",
+                merchant_id,
+                start_date,
+                end_date,
+            )
+            response = await client.get(
+                routes.MCP_PAYOUT_DETAILS,
+                params=params,
+                extra_headers={"merchant-id": merchant_id},
+            )
+            return json.dumps(response, indent=2)
+        except PineLabsAPIError as e:
+            logger.error("Pine Labs API error: %s", e)
+            return api_error_response(
+                e.message, e.code, e.status_code,
+            )
+        except Exception as e:
+            logger.error(
+                "Unexpected error fetching payout details: %s", e,
+            )
+            return unexpected_error_response(
+                e, "fetching payout details",
+            )

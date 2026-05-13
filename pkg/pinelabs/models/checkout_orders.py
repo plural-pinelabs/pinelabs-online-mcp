@@ -130,6 +130,32 @@ class PurchaseDetails(BaseModel):
     )
 
 
+class CaptureOrderRequest(BaseModel):
+    """Request body for capturing a pre-authorized Pine Labs order.
+
+    Required fields: merchant_capture_reference
+    Optional fields: capture_amount (mandatory for partial capture)
+    """
+
+    merchant_capture_reference: str = Field(
+        ...,
+        min_length=1,
+        max_length=50,
+        pattern=r"^[A-Za-z0-9_-]+$",
+        description=(
+            "Unique identifier for the capture order request "
+            "(e.g., 123456789)"
+        ),
+    )
+    capture_amount: Optional[Amount] = Field(
+        default=None,
+        description=(
+            "Capture amount details (mandatory for partial capture). "
+            "Contains value (in paisa) and currency."
+        ),
+    )
+
+
 class CheckoutProduct(BaseModel):
     """Product details for EMI orders."""
 
