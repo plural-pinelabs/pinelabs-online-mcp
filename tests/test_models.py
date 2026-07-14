@@ -1,5 +1,7 @@
 """Tests for Pydantic models in models/payment_links.py."""
 
+from datetime import datetime, timedelta, timezone
+
 import pytest
 from pydantic import ValidationError
 
@@ -12,6 +14,12 @@ from pkg.pinelabs.models.payment_links import (
     Customer,
     ProductDetail,
 )
+
+
+def _future_expire_by(days: int = 30) -> str:
+    return (
+        datetime.now(timezone.utc) + timedelta(days=days)
+    ).replace(second=0, microsecond=0).strftime("%Y-%m-%dT%H:%MZ")
 
 
 # ---------------------------------------------------------------------------
@@ -226,7 +234,7 @@ class TestCreatePaymentLinkRequest:
             merchant_payment_link_reference="ref-full",
             customer=Customer(email_id="a@b.com", mobile_number="9876543210"),
             description="Test payment",
-            expire_by="2026-06-01T10:00Z",
+            expire_by=_future_expire_by(),
             allowed_payment_methods=[AllowedPaymentMethod.CARD, AllowedPaymentMethod.UPI],
             product_details=[ProductDetail(product_code="item_1")],
             cart_coupon_discount_amount=Amount(value=500),

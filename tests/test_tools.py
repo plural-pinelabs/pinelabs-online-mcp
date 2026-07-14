@@ -1,6 +1,7 @@
 """Tests for payment link and order MCP tools."""
 
 import json
+from datetime import datetime, timedelta, timezone
 from unittest.mock import AsyncMock
 
 import pytest
@@ -45,6 +46,13 @@ def _make_mcp_and_register_order_tools(client):
     return mcp.tools
 
 
+def _future_expire_by(days: int = 30) -> str:
+    """Return a future ISO 8601 timestamp accepted by validate_expire_by."""
+    return (
+        datetime.now(timezone.utc) + timedelta(days=days)
+    ).replace(second=0, microsecond=0).strftime("%Y-%m-%dT%H:%MZ")
+
+
 # ---------------------------------------------------------------------------
 # create_payment_link
 # ---------------------------------------------------------------------------
@@ -81,7 +89,7 @@ class TestCreatePaymentLink:
             customer_country_code="+91",
             customer_id="cust-123",
             description="Test order",
-            expire_by="2026-06-01T10:00Z",
+            expire_by=_future_expire_by(),
             allowed_payment_methods=["CARD", "UPI"],
             billing_address1="123 St",
             billing_city="Mumbai",
