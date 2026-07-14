@@ -4,7 +4,7 @@
   "title": "PineLabs Plural PG — Payment Gateway MCP Server",
   "description": "Create payment orders, checkout, subscriptions & UPI via PineLabs Plural PG gateway",
   "version": "0.1.2",
-  "websiteUrl": "https://developer.pinelabsonline.com",
+  "websiteUrl": "https://www.pinelabs.com/docs/online-payments",
   "repository": {
     "url": "https://github.com/plural-pinelabs/pinelabs-online-mcp",
     "source": "github",
