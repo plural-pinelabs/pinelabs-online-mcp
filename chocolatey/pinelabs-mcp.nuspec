@@ -6,7 +6,7 @@
     <packageSourceUrl>https://github.com/plural-pinelabs/pinelabs-online-mcp/tree/main/chocolatey</packageSourceUrl>
     <owners>pinelabs-mcp</owners>
 
-    <title>Pine Labs MCP Server</title>
+    <title>Pine Labs Online Payments MCP Server</title>
     <authors>Pine Labs</authors>
     <projectUrl>https://github.com/plural-pinelabs/pinelabs-online-mcp</projectUrl>
     <projectSourceUrl>https://github.com/plural-pinelabs/pinelabs-online-mcp</projectSourceUrl>
@@ -16,11 +16,11 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
 
     <tags>pinelabs mcp payments fastmcp model-context-protocol admin</tags>
-    <summary>Official Pine Labs MCP Server exposing Pine Labs payment APIs over the Model Context Protocol (stdio).</summary>
+    <summary>Official Pine Labs Online Payments MCP Server exposing Pine Labs Online Payments APIs over the Model Context Protocol (stdio).</summary>
     <description><![CDATA[
-Pine Labs MCP Server is the official Model Context Protocol (MCP) server for Pine Labs payment APIs.
+Pine Labs Online Payments MCP Server is the official Model Context Protocol (MCP) server for Pine Labs Online Payments APIs.
 
-It lets MCP-compatible clients (Claude Desktop, Cursor, VS Code Copilot, etc.) interact with Pine Labs
+It lets MCP-compatible clients (Claude Desktop, Cursor, VS Code Copilot, etc.) interact with Pine Labs Online Payments
 Online to create and manage payment links, orders, subscriptions, plans, presentations, UPI intent QR
 payments, refunds, and merchant analytics over a stdio transport.
 

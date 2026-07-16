@@ -1,8 +1,8 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.plural-pinelabs/pinelabs-online-mcp",
-  "title": "PineLabs Plural PG — Payment Gateway MCP Server",
-  "description": "Create payment orders, checkout, subscriptions & UPI via PineLabs Plural PG gateway",
+  "title": "Pine Labs Online Payments — Payment Gateway MCP Server",
+  "description": "Create payment orders, checkout, subscriptions and UPI flows via Pine Labs Online Payments gateway",
   "version": "0.1.2",
   "websiteUrl": "https://www.pinelabs.com/docs/online-payments",
   "repository": {
@@ -20,10 +20,10 @@
     "pine labs online",
     "pinelabs-online",
 
-    "plural",
-    "plural online",
-    "pluralonline",
-    "pinelabs plural",
+    "pine labs online payments",
+    "pinelabs online payments",
+    "online payments",
+    "pine labs payments",
 
     "pg",
     "pl",
@@ -104,13 +104,13 @@
       "headers": [
         {
           "name": "X-Client-Id",
-          "description": "Pine Labs Client ID from your merchant dashboard",
+          "description": "Pine Labs Online Payments Client ID from your merchant dashboard",
           "isRequired": true,
           "isSecret": true
         },
         {
           "name": "X-Client-Secret",
-          "description": "Pine Labs Client Secret from your merchant dashboard",
+          "description": "Pine Labs Online Payments Client Secret from your merchant dashboard",
           "isRequired": true,
           "isSecret": true
         }
@@ -136,13 +136,13 @@
       "environmentVariables": [
         {
           "name": "PINELABS_CLIENT_ID",
-          "description": "Pine Labs Client ID from your merchant dashboard",
+          "description": "Pine Labs Online Payments Client ID from your merchant dashboard",
           "isRequired": true,
           "isSecret": true
         },
         {
           "name": "PINELABS_CLIENT_SECRET",
-          "description": "Pine Labs Client Secret from your merchant dashboard",
+          "description": "Pine Labs Online Payments Client Secret from your merchant dashboard",
           "isRequired": true,
           "isSecret": true
         },
@@ -171,13 +171,13 @@
       "environmentVariables": [
         {
           "name": "PINELABS_CLIENT_ID",
-          "description": "Pine Labs Client ID from your merchant dashboard",
+          "description": "Pine Labs Online Payments Client ID from your merchant dashboard",
           "isRequired": true,
           "isSecret": true
         },
         {
           "name": "PINELABS_CLIENT_SECRET",
-          "description": "Pine Labs Client Secret from your merchant dashboard",
+          "description": "Pine Labs Online Payments Client Secret from your merchant dashboard",
           "isRequired": true,
           "isSecret": true
         },

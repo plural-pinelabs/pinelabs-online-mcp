@@ -1,10 +1,10 @@
-# Pine Labs Payment Gateway MCP Server (Official)
+# Pine Labs Online Payments MCP Server (Official)
 
 <!-- mcp-name: io.github.plural-pinelabs/pinelabs-online-mcp -->
 
 [![npm package](https://img.shields.io/npm/v/pinelabs-mcp.svg)](https://www.npmjs.com/package/pinelabs-mcp)
 
-MCP client for Pine Labs payment gateway -- connect Claude Desktop, Cursor, VS Code, and other AI assistants to Pine Labs payment APIs using your client credentials.
+MCP client for Pine Labs Online Payments gateway -- connect Claude Desktop, Cursor, VS Code, and other AI assistants to Pine Labs Online Payments APIs using your client credentials.
 
 [Full Documentation](#available-tools) | [Available Tools](#available-tools) | [Use Cases](#use-cases) | [FAQs](#faq)
 
@@ -33,7 +33,7 @@ MCP client for Pine Labs payment gateway -- connect Claude Desktop, Cursor, VS C
 ## Prerequisites
 
 - **Node.js 18+** -- [Download](https://nodejs.org/) or install npm i pinelabs-mcp
-- **Pine Labs Client Credentials** -- Get your Client ID and Client Secret from the [Pine Labs developer portal](https://developer.pinelabsonline.com/docs/mcp-server-overview)
+- **Pine Labs Online Payments Client Credentials** -- Get your Client ID and Client Secret from the [Pine Labs developer portal](https://www.pinelabs.com/docs/online-payments/ai/mcp-server)
 
 ---
 
@@ -41,7 +41,7 @@ MCP client for Pine Labs payment gateway -- connect Claude Desktop, Cursor, VS C
 
 ### Getting Your Credentials
 
-1. Sign up or log in to the Pine Labs <a href="https://dashboardv2.pluralonline.com/signup" target="_blank">merchant dashboard</a> provided with your account.
+1. Sign up or log in to the Pine Labs Online Payments <a href="https://dashboardv2.pluralonline.com/signup" target="_blank">merchant dashboard</a> provided with your account.
 2. Navigate to your account settings to locate your **Client ID** and **Client Secret**.
 3. Use these credentials in the MCP server configuration as shown in the setup instructions above.
 
@@ -58,7 +58,7 @@ npx pinelabs-mcp test
 npx pinelabs-mcp setup cursor       # or: claude-desktop, vscode, windsurf, opencode, copilot, codex
 ```
 
-Then restart your AI client and start using Pine Labs tools.
+Then restart your AI client and start using Pine Labs Online Payments tools.
 
 ---
 
@@ -118,7 +118,7 @@ If you prefer to configure manually instead of using `npx pinelabs-mcp setup`, a
 
 ## Available Tools
 
-The Pine Labs MCP Server exposes 50+ tools across multiple categories. Each tool maps to a specific Pine Labs payment API endpoint.
+The Pine Labs Online Payments MCP Server exposes 50+ tools across multiple categories. Each tool maps to a specific Pine Labs Online Payments API endpoint.
 
 ### Tool Type Legend
 
@@ -137,115 +137,115 @@ Each tool below is tagged with a **Type** indicating its access pattern and oper
 
 | Tool | Type | Description | API Reference |
 |:-----|:-----|:------------|:--------------|
-| `create_payment_link` | Write | Create a new payment link for collecting payments | [Payment Link - Create](https://developer.pinelabsonline.com/reference/payment-link-create) |
-| `get_payment_link_by_id` | Read | Fetch a payment link by its payment link ID | [Payment Link - Get by ID](https://developer.pinelabsonline.com/reference/payment-link-get-by-payment-link-id) |
-| `get_payment_link_by_merchant_reference` | Read | Fetch a payment link by its merchant payment link reference | [Payment Link - Get by Reference](https://developer.pinelabsonline.com/reference/payment-link-get-by-merchant-payment-link-reference) |
-| `cancel_payment_link` | Destructive | Cancel an active payment link | [Payment Link - Cancel](https://developer.pinelabsonline.com/reference/payment-link-cancel) |
-| `resend_payment_link_notification` | Write | Resend a payment link notification to the customer | [Payment Link - Resend](https://developer.pinelabsonline.com/reference/payment-link-resend) |
+| `create_payment_link` | Write | Create a new payment link for collecting payments | [Payment Link - Create](https://www.pinelabs.com/docs/online-payments/api/payment-links/create-payment-link) |
+| `get_payment_link_by_id` | Read | Fetch a payment link by its payment link ID | [Payment Link - Get by ID](https://www.pinelabs.com/docs/online-payments/api/payment-links/get-payment-link-by-id) |
+| `get_payment_link_by_merchant_reference` | Read | Fetch a payment link by its merchant payment link reference | [Payment Link - Get by Reference](https://www.pinelabs.com/docs/online-payments/api/payment-links/get-payment-link-by-merchant-reference) |
+| `cancel_payment_link` | Destructive | Cancel an active payment link | [Payment Link - Cancel](https://www.pinelabs.com/docs/online-payments/api/payment-links/cancel-payment-link) |
+| `resend_payment_link_notification` | Write | Resend a payment link notification to the customer | [Payment Link - Resend](https://www.pinelabs.com/docs/online-payments/api/payment-links/resend-payment-link-notification) |
 
 ### Orders
 
 | Tool | Type | Description | API Reference |
 |:-----|:-----|:------------|:--------------|
-| `get_order_by_order_id` | Read | Retrieve order details by order ID | [Order - Get by ID](https://developer.pinelabsonline.com/reference/orders-get-by-order-id) |
-| `get_order_by_merchant_order_reference` | Read | Retrieve order details by merchant order reference | [Order - Get by Merchant Reference](https://developer.pinelabsonline.com/reference/orders-get-by-merchant-order-reference) |
-| `capture_order` | Write | Capture a previously authorized payment against an order | [Order - Capture](https://developer.pinelabsonline.com/reference/orders-capture) |
-| `cancel_order` | Destructive | Cancel a pre-authorized payment against an order | [Order - Cancel](https://developer.pinelabsonline.com/reference/orders-cancel) |
-| `fetch_order_payments` | Read | Fetch all payment attempts associated with an order | [Order - Get Payments](https://developer.pinelabsonline.com/reference/orders-get-payments) |
+| `get_order_by_order_id` | Read | Retrieve order details by order ID | [Order - Get by ID](https://www.pinelabs.com/docs/online-payments/api/orders/get-order-by-id) |
+| `get_order_by_merchant_order_reference` | Read | Retrieve order details by merchant order reference | [Order - Get by Merchant Reference](https://www.pinelabs.com/docs/online-payments/api/orders/get-order-by-merchant-reference) |
+| `capture_order` | Write | Capture a previously authorized payment against an order | [Order - Capture](https://www.pinelabs.com/docs/online-payments/api/orders/capture-order) |
+| `cancel_order` | Destructive | Cancel a pre-authorized payment against an order | [Order - Cancel](https://www.pinelabs.com/docs/online-payments/api/orders/cancel-order) |
+| `fetch_order_payments` | Read | Fetch all payment attempts associated with an order | [Order - Get Payments](https://www.pinelabs.com/docs/online-payments/api/orders/get-order-by-id) |
 
 ### Checkout Orders
 
 | Tool | Type | Description | API Reference |
 |:-----|:-----|:------------|:--------------|
-| `create_order` | Write | Create a new checkout order and generate a checkout link | [Order - Create](https://developer.pinelabsonline.com/reference/orders-create) |
+| `create_order` | Write | Create a new checkout order and generate a checkout link | [Order - Create](https://www.pinelabs.com/docs/online-payments/api/checkout/generate-checkout-link) |
 
 ### Card Payments
 
 | Tool | Type | Description | API Reference |
 |:-----|:-----|:------------|:--------------|
-| `create_card_payment` | Write | Create a server-to-server card payment against an order | [Card Payment - Create](https://developer.pinelabsonline.com/reference/payments-create-card-payment) |
-| `get_card_details` | Read | Retrieve card details (BIN, network, type) for a card number | [Card Details - Get](https://developer.pinelabsonline.com/reference/get-card-details) |
+| `create_card_payment` | Write | Create a server-to-server card payment against an order | [Card Payment - Create](https://www.pinelabs.com/docs/online-payments/api/card-payments/create-payment) |
+| `get_card_details` | Read | Retrieve card details (BIN, network, type) for a card number | [Card Details - Get](https://www.pinelabs.com/docs/online-payments/api/card-payments/get-card-details) |
 
 ### OTP
 
 | Tool | Type | Description | API Reference |
 |:-----|:-----|:------------|:--------------|
-| `generate_otp` | Write | Generate an OTP for a card payment authentication flow | [OTP - Generate](https://developer.pinelabsonline.com/reference/generate-otp) |
-| `submit_otp` | Write | Submit an OTP to complete a card payment authentication | [OTP - Submit](https://developer.pinelabsonline.com/reference/submit-otp) |
-| `resend_otp` | Write | Resend an OTP for a card payment authentication | [OTP - Resend](https://developer.pinelabsonline.com/reference/resend-otp) |
+| `generate_otp` | Write | Generate an OTP for a card payment authentication flow | [OTP - Generate](https://www.pinelabs.com/docs/online-payments/api/card-payments/generate-otp) |
+| `submit_otp` | Write | Submit an OTP to complete a card payment authentication | [OTP - Submit](https://www.pinelabs.com/docs/online-payments/api/card-payments/submit-otp) |
+| `resend_otp` | Write | Resend an OTP for a card payment authentication | [OTP - Resend](https://www.pinelabs.com/docs/online-payments/api/card-payments/resend-otp) |
 
 ### Refunds
 
 | Tool | Type | Description | API Reference |
 |:-----|:-----|:------------|:--------------|
-| `create_refund` | Destructive | Initiate a full or partial refund against a captured payment | [Refund - Create](https://developer.pinelabsonline.com/reference/refund-create) |
+| `create_refund` | Destructive | Initiate a full or partial refund against a captured payment | [Refund - Create](https://www.pinelabs.com/docs/online-payments/api/refunds/create-refund) |
 
 ### Settlements
 
 | Tool | Type | Description | API Reference |
 |:-----|:-----|:------------|:--------------|
-| `get_all_settlements` | Read | Retrieve all settlements for the merchant within a date range | [Settlements - Get All](https://developer.pinelabsonline.com/reference/get-all-settlements) |
-| `get_settlement_by_utr` | Read | Retrieve a specific settlement by its UTR (Unique Transaction Reference) | [Settlement - Get by UTR](https://developer.pinelabsonline.com/reference/get-settlement-by-utr) |
+| `get_all_settlements` | Read | Retrieve all settlements for the merchant within a date range | [Settlements - Get All](https://www.pinelabs.com/docs/online-payments/api/settlements/get-all-settlements) |
+| `get_settlement_by_utr` | Read | Retrieve a specific settlement by its UTR (Unique Transaction Reference) | [Settlement - Get by UTR](https://www.pinelabs.com/docs/online-payments/api/settlements/get-settlements-by-utr) |
 
 ### Payouts
 
 | Tool | Type | Description | API Reference |
 |:-----|:-----|:------------|:--------------|
-| `create_payout` | Destructive | Create a payout to disburse funds to a beneficiary (moves money) | [Payout - Create](https://developer.pinelabsonline.com/reference/create-payout) |
-| `get_payout_details` | Read | Retrieve details of a payout by payout ID | [Payout - Get](https://developer.pinelabsonline.com/reference/get-payout) |
-| `get_payout_payments` | Read | List payments associated with a payout | [Payout - Get Payments](https://developer.pinelabsonline.com/reference/get-payout-payments) |
-| `get_payout_balance` | Read | Retrieve the available payout balance for the merchant | [Payout - Get Balance](https://developer.pinelabsonline.com/reference/get-payout-balance) |
-| `update_payout` | Write | Update an existing payout request | [Payout - Update](https://developer.pinelabsonline.com/reference/update-payout) |
-| `cancel_payout` | Destructive | Cancel a pending payout request | [Payout - Cancel](https://developer.pinelabsonline.com/reference/cancel-payout) |
+| `create_payout` | Destructive | Create a payout to disburse funds to a beneficiary (moves money) | [Payout - Create](https://www.pinelabs.com/docs/online-payments/api/payouts/create-payout) |
+| `get_payout_details` | Read | Retrieve details of a payout by payout ID | [Payout - Get](https://www.pinelabs.com/docs/online-payments/api/payouts/list-payouts) |
+| `get_payout_payments` | Read | List payments associated with a payout | [Payout - Get Payments](https://www.pinelabs.com/docs/online-payments/api/payouts/list-payouts) |
+| `get_payout_balance` | Read | Retrieve the available payout balance for the merchant | [Payout - Get Balance](https://www.pinelabs.com/docs/online-payments/api/payouts/get-payout-balance) |
+| `update_payout` | Write | Update an existing payout request | [Payout - Update](https://www.pinelabs.com/docs/online-payments/api/payouts/update-scheduled-payout) |
+| `cancel_payout` | Destructive | Cancel a pending payout request | [Payout - Cancel](https://www.pinelabs.com/docs/online-payments/api/payouts/cancel-scheduled-payout) |
 
 ### Subscriptions
 
 | Tool | Type | Description | API Reference |
 |:-----|:-----|:------------|:--------------|
-| `create_plan` | Write | Create a new subscription plan | [Plan - Create](https://developer.pinelabsonline.com/reference/create-plan) |
-| `get_plans` | Read | Retrieve subscription plans | [Plan - Get All](https://developer.pinelabsonline.com/reference/get-all-plans) |
-| `get_plan_by_id` | Read | Retrieve a subscription plan by plan ID | [Plan - Get Specific](https://developer.pinelabsonline.com/reference/get-specific-plan) |
-| `get_plan_by_merchant_reference` | Read | Retrieve a plan by merchant plan reference | [Plan - Get Specific](https://developer.pinelabsonline.com/reference/get-specific-plan) |
-| `update_plan` | Write | Update an existing subscription plan | [Plan - Update](https://developer.pinelabsonline.com/reference/update-plan) |
-| `delete_plan` | Destructive | Delete a subscription plan | [Plan - Delete](https://developer.pinelabsonline.com/reference/delete-plan) |
-| `create_subscription` | Write | Create a new subscription against a plan | [Subscription - Create](https://developer.pinelabsonline.com/reference/create-subscription) |
-| `get_subscriptions` | Read | Retrieve subscriptions | [Subscription - Get All](https://developer.pinelabsonline.com/reference/get-all-subscriptions) |
-| `get_subscription_by_id` | Read | Retrieve a subscription by subscription ID | [Subscription - Get Specific](https://developer.pinelabsonline.com/reference/get-specific-subscription) |
-| `get_subscription_by_merchant_reference` | Read | Retrieve a subscription by merchant reference | [Subscription - Get Specific](https://developer.pinelabsonline.com/reference/get-specific-subscription) |
-| `pause_subscription` | Write | Pause an active subscription | [Subscription - Pause](https://developer.pinelabsonline.com/reference/pause-subscription) |
-| `resume_subscription` | Write | Resume a paused subscription | [Subscription - Resume](https://developer.pinelabsonline.com/reference/resume-subscription) |
-| `cancel_subscription` | Destructive | Cancel an active subscription | [Subscription - Cancel](https://developer.pinelabsonline.com/reference/cancel-subscription) |
-| `update_subscription` | Write | Update an existing subscription | [Subscription - Update](https://developer.pinelabsonline.com/reference/update-subscription) |
-| `create_presentation` | Write | Create a presentation (payment request) for a subscription | [Presentation - Create](https://developer.pinelabsonline.com/reference/create-presentation) |
-| `get_presentation` | Read | Retrieve a presentation by presentation ID | [Presentation - Get](https://developer.pinelabsonline.com/reference/get-presentation) |
-| `delete_presentation` | Destructive | Delete a presentation | [Presentation - Delete](https://developer.pinelabsonline.com/reference/delete-presentation) |
-| `get_presentations_by_subscription_id` | Read | Retrieve all presentations for a subscription | [Presentation - Get by Subscription](https://developer.pinelabsonline.com/reference/get-presentation-by-subscription-id) |
-| `get_presentation_by_merchant_reference` | Read | Retrieve a presentation by merchant reference | [Presentation - Get](https://developer.pinelabsonline.com/reference/get-presentation) |
-| `send_subscription_notification` | Write | Send a pre-debit notification for a subscription | [Presentation - Create](https://developer.pinelabsonline.com/reference/create-presentation) |
-| `create_debit` | Destructive | Execute a debit (payment collection) against a subscription | [Presentation - Create](https://developer.pinelabsonline.com/reference/create-presentation) |
-| `create_merchant_retry` | Write | Retry mandate execution for a failed debit (max 3 retries) | [Merchant Retry](https://developer.pinelabsonline.com/reference/create-merchant-retry) |
+| `create_plan` | Write | Create a new subscription plan | [Plan - Create](https://www.pinelabs.com/docs/online-payments/api/subscriptions-plans/create-plan) |
+| `get_plans` | Read | Retrieve subscription plans | [Plan - Get All](https://www.pinelabs.com/docs/online-payments/api/subscriptions-plans/list-plans) |
+| `get_plan_by_id` | Read | Retrieve a subscription plan by plan ID | [Plan - Get Specific](https://www.pinelabs.com/docs/online-payments/api/subscriptions-plans/get-plan-by-id) |
+| `get_plan_by_merchant_reference` | Read | Retrieve a plan by merchant plan reference | [Plan - Get Specific](https://www.pinelabs.com/docs/online-payments/api/subscriptions-plans/get-plan-by-merchant-reference) |
+| `update_plan` | Write | Update an existing subscription plan | [Plan - Update](https://www.pinelabs.com/docs/online-payments/api/subscriptions-plans/update-plan) |
+| `delete_plan` | Destructive | Delete a subscription plan | [Plan - Delete](https://www.pinelabs.com/docs/online-payments/api/subscriptions-plans/delete-plan) |
+| `create_subscription` | Write | Create a new subscription against a plan | [Subscription - Create](https://www.pinelabs.com/docs/online-payments/api/subscriptions-subscriptions/create-subscription) |
+| `get_subscriptions` | Read | Retrieve subscriptions | [Subscription - Get All](https://www.pinelabs.com/docs/online-payments/api/subscriptions-subscriptions/list-subscriptions) |
+| `get_subscription_by_id` | Read | Retrieve a subscription by subscription ID | [Subscription - Get Specific](https://www.pinelabs.com/docs/online-payments/api/subscriptions-subscriptions/get-subscription-by-id) |
+| `get_subscription_by_merchant_reference` | Read | Retrieve a subscription by merchant reference | [Subscription - Get Specific](https://www.pinelabs.com/docs/online-payments/api/subscriptions-subscriptions/get-subscription-by-merchant-reference) |
+| `pause_subscription` | Write | Pause an active subscription | [Subscription - Pause](https://www.pinelabs.com/docs/online-payments/api/subscriptions-subscriptions/pause-subscription) |
+| `resume_subscription` | Write | Resume a paused subscription | [Subscription - Resume](https://www.pinelabs.com/docs/online-payments/api/subscriptions-subscriptions/resume-subscription) |
+| `cancel_subscription` | Destructive | Cancel an active subscription | [Subscription - Cancel](https://www.pinelabs.com/docs/online-payments/api/subscriptions-subscriptions/cancel-subscription) |
+| `update_subscription` | Write | Update an existing subscription | [Subscription - Update](https://www.pinelabs.com/docs/online-payments/api/subscriptions-subscriptions/update-subscription) |
+| `create_presentation` | Write | Create a presentation (payment request) for a subscription | [Presentation - Create](https://www.pinelabs.com/docs/online-payments/api/subscriptions-presentations/create-presentation) |
+| `get_presentation` | Read | Retrieve a presentation by presentation ID | [Presentation - Get](https://www.pinelabs.com/docs/online-payments/api/subscriptions-presentations/get-presentation-by-id) |
+| `delete_presentation` | Destructive | Delete a presentation | [Presentation - Delete](https://www.pinelabs.com/docs/online-payments/api/subscriptions-presentations/delete-presentation) |
+| `get_presentations_by_subscription_id` | Read | Retrieve all presentations for a subscription | [Presentation - Get by Subscription](https://www.pinelabs.com/docs/online-payments/api/subscriptions-presentations/list-presentations-by-subscription) |
+| `get_presentation_by_merchant_reference` | Read | Retrieve a presentation by merchant reference | [Presentation - Get](https://www.pinelabs.com/docs/online-payments/api/subscriptions-presentations/get-presentation-by-merchant-reference) |
+| `send_subscription_notification` | Write | Send a pre-debit notification for a subscription | [Presentation - Create](https://www.pinelabs.com/docs/online-payments/api/subscriptions-presentations/send-subscription-notification) |
+| `create_debit` | Destructive | Execute a debit (payment collection) against a subscription | [Presentation - Create](https://www.pinelabs.com/docs/online-payments/api/subscriptions-presentations/create-debit) |
+| `create_merchant_retry` | Write | Retry mandate execution for a failed debit (max 3 retries) | [Merchant Retry](https://www.pinelabs.com/docs/online-payments/api/subscriptions-presentations/create-merchant-retry) |
 
 ### UPI Payments
 
 | Tool | Type | Description | API Reference |
 |:-----|:-----|:------------|:--------------|
-| `create_upi_intent_payment_with_qr` | Write | Create a UPI intent payment with QR code for instant collection | [UPI Intent QR](https://developer.pinelabsonline.com/reference/create-intent-payment-with-qr-image) |
+| `create_upi_intent_payment_with_qr` | Write | Create a UPI intent payment with QR code for instant collection | [UPI Intent QR](https://www.pinelabs.com/docs/online-payments/api/upi-payments/create-payment) |
 
 ### Reports and Transaction Search
 
 | Tool | Type | Description | API Reference |
 |:-----|:-----|:------------|:--------------|
-| `get_payment_link_details` | Read | Fetch payment link details within a date range | [API Docs](https://developer.pinelabsonline.com/docs/mcp-server-overview) |
-| `get_order_details` | Read | Fetch order details within a date range | [API Docs](https://developer.pinelabsonline.com/docs/mcp-server-overview) |
-| `get_refund_order_details` | Read | Fetch refund order details within a date range | [API Docs](https://developer.pinelabsonline.com/docs/mcp-server-overview) |
-| `search_transaction` | Read | Search for a transaction by transaction ID | [API Docs](https://developer.pinelabsonline.com/docs/mcp-server-overview) |
+| `get_payment_link_details` | Read | Fetch payment link details within a date range | [API Docs](https://www.pinelabs.com/docs/online-payments/ai/mcp-server) |
+| `get_order_details` | Read | Fetch order details within a date range | [API Docs](https://www.pinelabs.com/docs/online-payments/ai/mcp-server) |
+| `get_refund_order_details` | Read | Fetch refund order details within a date range | [API Docs](https://www.pinelabs.com/docs/online-payments/ai/mcp-server) |
+| `search_transaction` | Read | Search for a transaction by transaction ID | [API Docs](https://www.pinelabs.com/docs/online-payments/ai/mcp-server) |
 
 ### Developer Tools
 
 | Tool | Type | Description |
 |:-----|:-----|:------------|
 | `get_api_documentation` | Read | Fetch Pine Labs API documentation for a specific API |
-| `list_plural_apis` | Read | List all available Pine Labs (Plural) APIs with descriptions |
+| `list_plural_apis` | Read | List all available Pine Labs Online Payments APIs with descriptions |
 | `detect_stack` | Read | Detect the technology stack of the current project to tailor integration guidance |
 | `integrate_pinelabs_checkout` | Read | Generate stack-aware code snippets and integration guidance for Pine Labs Checkout |
 
@@ -272,17 +272,17 @@ Each tool below is tagged with a **Type** indicating its access pattern and oper
 
 ## Remote MCP Server
 
-The Remote MCP Server is hosted and maintained by Pine Labs. Use this approach if you prefer to configure your AI client manually with the remote endpoint instead of using the [npm CLI](#quick-start).
+The Remote MCP Server is hosted and maintained by Pine Labs Online Payments. Use this approach if you prefer to configure your AI client manually with the remote endpoint instead of using the [npm CLI](#quick-start).
 
 ### Benefits
 
 - **Zero Setup**: No Python, Docker, or local infrastructure to manage
 - **Always Updated**: Automatic updates with the latest payment API features and security patches
-- **High Availability**: Hosted on Pine Labs production infrastructure
+- **High Availability**: Hosted on Pine Labs Online Payments production infrastructure
 - **Secure Authentication**: Client credential authentication over HTTPS
 
 If you are connecting to a self-hosted remote deployment instead of the
-Pine Labs hosted service, replace the remote URL below with
+Pine Labs Online Payments service, replace the remote URL below with
 `<your-mcp-server-url>`.
 
 ### Prerequisites
@@ -401,7 +401,7 @@ Learn more about MCP servers in VS Code's [agent mode documentation](https://cod
 
 ## Authentication
 
-The MCP server authenticates using **Client ID** and **Client Secret** credentials issued by Pine Labs.
+The MCP server authenticates using **Client ID** and **Client Secret** credentials issued by Pine Labs Online Payments.
 
 > **Note:** For local deployments, credentials can be passed via CLI arguments or environment variables. For the remote server, credentials are passed as HTTP headers.
 
@@ -464,7 +464,7 @@ choco uninstall pinelabs-mcp
 
 ### Using Public Docker Image (Recommended)
 
-Use the official Pine Labs Docker image directly. No build step required.
+Use the official Pine Labs Online Payments Docker image directly. No build step required.
 
 > **Note:** To pin a specific version, replace `pinelabs/mcp:latest` with `pinelabs/mcp:<version-tag>` (e.g., `pinelabs/mcp:v1.0.0`) in the configurations below.
 
@@ -706,13 +706,13 @@ A: The server supports `uat` (default) and `prod` environments. Set via `PINELAB
 A: Yes. Use the `--read-only` flag to disable write operations, or use `--toolsets` to enable specific toolsets (e.g., `--toolsets payment_links,orders`).
 
 **Q: Where can I find the full API reference?**
-A: Visit the [Pine Labs Developer Documentation](https://developer.pinelabsonline.com/docs/mcp-server-overview) for the complete API reference.
+A: Visit the [Pine Labs Online Payments Developer Documentation](https://www.pinelabs.com/docs/online-payments/ai/mcp-server) for the complete API reference.
 
 ---
 
 ## Keywords
 
-Pine Labs, Pine Labs Online, Plural, Plural Online, payment gateway, online payment gateway, checkout gateway, payment checkout, online checkout, hosted checkout, payment page, payments, online payments, digital payments, payment processing, accept payments, collect payments, payment integration, gateway integration, payments API, payment API, checkout API, gateway API, UPI, cards, credit card, debit card, netbanking, wallet, EMI, cardless EMI, subscriptions, recurring payments, orders, order payments, create payment, initiate payment, process payment, payment links, MCP server, Model Context Protocol, AI payment automation, agentic payments, QR code payments, payment orchestration, merchant API, transaction reporting, fintech, SDK
+Pine Labs Online Payments, Pine Labs, payment gateway, online payment gateway, checkout gateway, payment checkout, online checkout, hosted checkout, payment page, payments, online payments, digital payments, payment processing, accept payments, collect payments, payment integration, gateway integration, payments API, payment API, checkout API, gateway API, UPI, cards, credit card, debit card, netbanking, wallet, EMI, cardless EMI, subscriptions, recurring payments, orders, order payments, create payment, initiate payment, process payment, payment links, MCP server, Model Context Protocol, AI payment automation, agentic payments, QR code payments, payment orchestration, merchant API, transaction reporting, fintech, SDK
 
 ---
 

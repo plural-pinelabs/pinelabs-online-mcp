@@ -361,7 +361,7 @@ PINELABS_CLIENT_SECRET=your_actual_client_secret
 
 ### Where to find your credentials
 
-1. Log in to the [Plural Dashboard](https://dashboard.pluralonline.com/)
+1. Log in to the [Pine Labs Online Payments Dashboard](https://dashboard.pluralonline.com/)
 2. Navigate to **Developer** → **API Keys**
 3. Copy your **Client ID** and **Client Secret**
 4. For testing, use **UAT/Sandbox** keys
@@ -386,7 +386,7 @@ After adding your credentials, start your development server and test:
 
 When ready for production:
 
-1. Switch to **Live Mode** on the Plural Dashboard
+1. Switch to **Live Mode** on the Pine Labs Online Payments Dashboard
 2. Generate **Live** API keys
 3. Update `.env`:
    - `PINELABS_BASE_URL=https://api.pluralpay.in/api`

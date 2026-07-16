@@ -40,7 +40,7 @@ TOKEN_URLS: dict[Environment, str] = {
 # ---------------------------------------------------------------------------
 DOCS_BASE_URL: str = os.getenv(
     "PINELABS_DOCS_BASE_URL",
-    "https://developer.pinelabsonline.com",
+    "https://www.pinelabs.com/docs/online-payments",
 )
 
 # ---------------------------------------------------------------------------

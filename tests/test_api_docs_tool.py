@@ -224,11 +224,11 @@ class TestAPIDocsFetcher:
         monkeypatch.setattr("pkg.pinelabs.api_docs_fetcher._MD_FILES_DIR", str(tmp_path))
 
         # Write a cached file
-        cached = tmp_path / "orders-create.md"
+        cached = tmp_path / "create-order.md"
         cached.write_text(SAMPLE_OPENAPI_MARKDOWN, encoding="utf-8")
 
         result = await APIDocsFetcher.fetch(
-            "https://developer.pinelabsonline.com/reference/orders-create.md"
+            "https://www.pinelabs.com/docs/online-payments/api/orders/create-order.md"
         )
 
         assert result is not None
@@ -252,13 +252,13 @@ class TestAPIDocsFetcher:
             MockClient.return_value = mock_client_instance
 
             result = await APIDocsFetcher.fetch(
-                "https://developer.pinelabsonline.com/reference/orders-create.md"
+                "https://www.pinelabs.com/docs/online-payments/api/orders/create-order.md"
             )
 
         assert result is not None
         assert result["parsed_data"]["title"] == "Create Order"
         # File should now be cached
-        assert (tmp_path / "orders-create.md").exists()
+        assert (tmp_path / "create-order.md").exists()
 
     @pytest.mark.asyncio
     async def test_fetch_http_error(self, tmp_path, monkeypatch):
@@ -277,7 +277,7 @@ class TestAPIDocsFetcher:
             MockClient.return_value = mock_client_instance
 
             result = await APIDocsFetcher.fetch(
-                "https://developer.pinelabsonline.com/reference/nonexistent.md"
+                "https://www.pinelabs.com/docs/online-payments/api/orders/nonexistent.md"
             )
 
         assert result is None
@@ -297,7 +297,7 @@ class TestAPIDocsFetcher:
             MockClient.return_value = mock_client_instance
 
             result = await APIDocsFetcher.fetch(
-                "https://developer.pinelabsonline.com/reference/orders-create.md"
+                "https://www.pinelabs.com/docs/online-payments/api/orders/create-order.md"
             )
 
         assert result is None
@@ -305,7 +305,7 @@ class TestAPIDocsFetcher:
     @pytest.mark.asyncio
     async def test_fetch_empty_filename(self):
         """URL with no filename should return None."""
-        result = await APIDocsFetcher.fetch("https://developer.pinelabsonline.com/")
+        result = await APIDocsFetcher.fetch("https://www.pinelabs.com/docs/online-payments/api/")
         assert result is None
 
 
@@ -384,7 +384,7 @@ class TestAPIDocsTools:
         assert result["api_name"] == "create_order"
         assert result["parsed_specification"]["title"] == "Create Order"
         assert "raw_markdown_preview" in result
-        assert result["documentation_url"].endswith("/reference/orders-create")
+        assert result["documentation_url"].endswith("/api/orders/create-order")
 
     @pytest.mark.asyncio
     async def test_get_api_documentation_fetch_failure(self):

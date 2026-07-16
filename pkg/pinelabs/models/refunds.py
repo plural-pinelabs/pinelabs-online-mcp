@@ -88,13 +88,13 @@ class SplitDetail(BaseModel):
         ...,
         max_length=50,
         description=(
-            "Unique identifier of the parent split settlement in the Plural database. "
+            "Unique identifier of the parent split settlement in the Pine Labs Online Payments database. "
             "Example: v1-250513063000-aa-UBAnaE-ss-g"
         ),
     )
     split_merchant_id: str = Field(
         ...,
-        description="Unique identifier of your partner merchant in the Plural database",
+        description="Unique identifier of your partner merchant in the Pine Labs Online Payments database",
     )
     merchant_settlement_reference: str = Field(
         ...,
